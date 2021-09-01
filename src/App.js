@@ -1,25 +1,32 @@
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
-function App() {
+import Home from "./components/home";
+import Cart from "./components/cart";
+import Navbar from "./components/navbar";
+import Preview from "./components/preview";
+import { useSelector } from "react-redux";
+
+let App = () => {
+  let state = useSelector((state) => state);
+  console.log(state);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Router>
+        <Navbar />
+        <Switch>
+          <Route path="/cart">
+            <Cart />
+          </Route>
+          <Route path="/preview/:id">
+            <Preview />
+          </Route>
+          <Route path="/">
+            <Home />
+          </Route>
+        </Switch>
+      </Router>
+    </>
   );
-}
+};
 
 export default App;
